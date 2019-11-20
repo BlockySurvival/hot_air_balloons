@@ -127,6 +127,7 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 		
 		on_activate = function(self, staticdata, dtime_s)
 			self.object:set_armor_groups({punch_operable = 1})
+			self.object:set_armor_groups({immortal = 1})
 			--so balloons don't get lost
 			self.object:setvelocity({x = 0, y = 0, z = 0})
 			
@@ -150,7 +151,7 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 		end,
 		
 		get_staticdata = mark_for_deletion_if_piloted,
-		
+		immortal = true,
 		
 		on_punch = function(self, puncher) --drop balloon item
 			if self.pilot
