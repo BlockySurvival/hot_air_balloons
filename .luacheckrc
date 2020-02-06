@@ -12,6 +12,5 @@ read_globals = {
 	table = {fields = {"copy", "getn"}},
 
 	"core", "vector",
-    "creative",
-
+	"creative",
 }
