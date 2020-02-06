@@ -4,9 +4,7 @@ local math_hypot = math.hypot
 local atan = math.atan
 local cos = math.cos
 local sin = math.sin
-local abs = math.abs
 local pi = math.pi
-local min = math.min
 
 --max speed settings
 local max_ballooning_vertical_speed = 1
@@ -21,7 +19,7 @@ local function get_vertical_acceleration(self)
 	local heat = self.heat
 	local vel_y = self.object:getvelocity().y
 	local acc_candidate = heat / 1000 - 0.5
-	
+
 	--enforce max speed
 	if vel_y > max_ballooning_vertical_speed
 		and acc_candidate * vel_y > 0
@@ -41,10 +39,9 @@ end
 
 local function swim(self, vel)
 	--allow controls, allow up
-	local pos = self.object:get_pos()
 	--keep y constant or rising
 	local acc_y = get_vertical_acceleration(self)
-	
+
 	if self.submerged or acc_y < 0
 	then
 		self.submerged = false
@@ -80,7 +77,7 @@ local function rotate(self, player)
 	-- + pi so it finishes rotating when looking towards where the player is looking
 	local player_yaw = player:get_look_horizontal() + pi
 	local self_yaw = self.object:getyaw()
-	
+
 	if get_rotate_direction(player_yaw, self_yaw)
 	then
 		self.object:setyaw(to_radian(self_yaw - pi_192ths))
@@ -98,7 +95,6 @@ function get_direction(right, left, up, down)
 	if right then cross = cross - 1 end
 	if up then inline = 1	end
 	if down then inline = inline - 1 end
-	local arg
 	if inline < 0
 	then
 		return atan(cross / inline) + pi, move
@@ -137,12 +133,12 @@ local function handle_control(self, vel)
 			self.heat = heat
 		end
 	end
-	
+
 	if control.jump --rotate towards player yaw
 	then
 		rotate(self, player)
 	end
-	
+
 	--taking direction from get_direction
 	--and turning it into radians.
 	--if max speed is reached, only acceleration in the opposite direction is applied.
@@ -181,8 +177,8 @@ return function(self)
 	local on_water, in_air = is_water_is_air(pos_under)
 	local acc = vector_new(0, 0, 0)
 	local vel = self.object:getvelocity()
-	
-	
+
+
 	if is_water_is_air(pos_in) --if submerged
 	then
 		vel = float_up(self, vel)

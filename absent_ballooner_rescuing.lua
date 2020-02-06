@@ -51,7 +51,7 @@ local on_join = function(player)
 		if absent_ballooners[name]
 		then
 			local pos = player:get_pos()
-			
+
 			--for compatibility with version 1.1 of the mod
 			if absent_ballooners[name] == true
 			then
