@@ -83,7 +83,7 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 		},
 		heat = 0,
 		balloon_type = name,
-		
+
 		on_step = function(self, dtime)
 			--decrease heat, move
 			if self.heat > 0
@@ -104,7 +104,7 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 			then
 				return
 			end
-			
+
 			--if not holding coal:
 			local playername = clicker:get_player_name()
 			if self.pilot and self.pilot == playername
@@ -124,13 +124,13 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 			self.heat = 0
 			self.object:setvelocity({x = 0, y = 0, z = 0})
 		end,
-		
+
 		on_activate = function(self, staticdata, dtime_s)
 			self.object:set_armor_groups({punch_operable = 1})
 			self.object:set_armor_groups({immortal = 1})
 			--so balloons don't get lost
 			self.object:setvelocity({x = 0, y = 0, z = 0})
-			
+
 			--checking if balloon was spawned from item or unloaded without pilot
 			if staticdata == ""
 			then
@@ -139,7 +139,7 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 			--checking if balloon should despawn when pilot logged off
 			local first_char = string_byte(staticdata)
 			--ballooner logged off, balloon will respawn when ballooner logs back in
-			if  first_char == 82 --chr 82 = R 
+			if  first_char == 82 --chr 82 = R
 			then
 				self.object:remove()
 				return
@@ -149,10 +149,10 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 				set_rescue(self, string_sub(staticdata, 2))
 			end
 		end,
-		
+
 		get_staticdata = mark_for_deletion_if_piloted,
 		immortal = true,
-		
+
 		on_punch = function(self, puncher) --drop balloon item
 			if self.pilot
 			then
@@ -217,6 +217,6 @@ minetest.register_craftitem(hot_air_balloons.get_item(
 		minetest.translate("hot_air_balloons", "Hot Air Balloon"),
 		"hot_air_balloons_balloon.png",
 		"hot_air_balloons:balloon"))
-		
+
 
 dofile(modpath .. "/craft.lua")
