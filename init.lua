@@ -161,6 +161,7 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 			then
 				return
 			else
+				local pos = self.object:get_pos()
 				self.object:remove()
 				local inv = puncher:get_inventory()
 				if not is_in_creative(puncher:get_player_name())
@@ -169,7 +170,7 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 					local leftover = inv:add_item("main", "hot_air_balloons:item")
 					if not leftover:is_empty()
 					then
-						add_item(self.object:get_pos(), leftover)
+						add_item(pos, leftover)
 					end
 				end
 			end
