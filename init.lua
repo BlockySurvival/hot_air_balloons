@@ -35,16 +35,22 @@ local get_fire_particle = function (pos)
 	}
 end
 
+local function get_fuel_value(item)
+	input = {
+		method = "fuel",
+		items = {item},
+	}
+	return minetest.get_craft_result(input).time or 0
+end
+
 local add_heat = function(self, player)
 	local item_stack = player:get_wielded_item()
-	local item_name = item_stack:get_name()
-	local group_coal = get_item_group(item_name, "coal")
-	if group_coal == 0
-	then
+	local fuelval = get_fuel_value(item_stack)
+	if not fuelval or fuelval == 0 then
 		return false
 	end
 	local heat = self.heat
-	heat = heat + 1200 * group_coal --1 min until heat is back to original
+	heat = heat + 30 * fuelval --for coal lump 1 min until heat is back to original
 	if heat < 12000 --cap heat at 12000 (10 min)
 	then
 		self.heat = heat
