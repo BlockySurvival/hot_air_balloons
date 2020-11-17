@@ -84,7 +84,6 @@ hot_air_balloons.get_entity = function(name, mesh_name, texture_name)
 			textures = {"hot_air_balloons_balloon_model.png"},
 			is_visible = true,
 			makes_footstep_sound = false,
-			automatic_rotate = false,
 			backface_culling = false,
 		},
 		heat = 0,
