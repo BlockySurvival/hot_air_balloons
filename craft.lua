@@ -14,12 +14,6 @@ then
 			{"",              "group:wood",         ""             },
 		},
 	})
-	minetest.register_craft(
-	{
-		type = "fuel",
-		recipe = "hot_air_balloons:item",
-		burntime = 20,
-	})
 	return
 end
 if minetest.get_modpath("mcl_buckets") and
@@ -35,12 +29,6 @@ then
 			{"mcl_mobitems:leather", "bucket:bucket_lava",   "mcl_mobitems:leather"},
 			{"mcl_mobitems:string",  "group:wood",           "mcl_mobitems:string" },
 		},
-	})
-	minetest.register_craft(
-	{
-		type = "fuel",
-		recipe = "hot_air_balloons:item",
-		burntime = 20,
 	})
 	return
 end
